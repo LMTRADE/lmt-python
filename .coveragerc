@@ -1,11 +1,11 @@
 [paths]
 source =
-    stripe
+    lmtpay
     */site-packages
 
 [run]
 branch = true
 parallel = true
-source = stripe
+source = lmtpay
 omit =
-    stripe/six.py
+    lmtpay/six.py
