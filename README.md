@@ -1,18 +1,18 @@
-# Stripe Python Library
+# Lmtpay Python Library
 
-[![pypi](https://img.shields.io/pypi/v/stripe.svg)](https://pypi.python.org/pypi/stripe)
-[![Build Status](https://github.com/stripe/stripe-python/actions/workflows/python-package.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-python/actions?query=branch%3Amaster)
-[![Coverage Status](https://coveralls.io/repos/github/stripe/stripe-python/badge.svg?branch=master)](https://coveralls.io/github/stripe/stripe-python?branch=master)
+[![pypi](https://img.shields.io/pypi/v/Lmtpay.svg)](https://pypi.python.org/pypi/Lmtpay)
+[![Build Status](https://github.com/Lmtpay/Lmtpay-python/actions/workflows/python-package.yml/badge.svg?branch=master)](https://github.com/Lmtpay/Lmtpay-python/actions?query=branch%3Amaster)
+[![Coverage Status](https://coveralls.io/repos/github/Lmtpay/Lmtpay-python/badge.svg?branch=master)](https://coveralls.io/github/Lmtpay/Lmtpay-python?branch=master)
 
-The Stripe Python library provides convenient access to the Stripe API from
+The Lmtpay Python library provides convenient access to the Lmtpay API from
 applications written in the Python language. It includes a pre-defined set of
 classes for API resources that initialize themselves dynamically from API
-responses which makes it compatible with a wide range of versions of the Stripe
+responses which makes it compatible with a wide range of versions of the Lmtpay
 API.
 
 ## Documentation
 
-See the [Python API docs](https://stripe.com/docs/api?lang=python).
+See the [Python API docs](https://Lmtpay.com/docs/api?lang=python).
 
 See [video demonstrations][youtube-playlist] covering how to use the library.
 
@@ -22,7 +22,7 @@ You don't need this source code unless you want to modify the package. If you ju
 want to use the package, just run:
 
 ```sh
-pip install --upgrade stripe
+pip install --upgrade Lmtpay
 ```
 
 Install from source with:
@@ -38,21 +38,21 @@ python setup.py install
 ## Usage
 
 The library needs to be configured with your account's secret key which is
-available in your [Stripe Dashboard][api-keys]. Set `stripe.api_key` to its
+available in your [Lmtpay Dashboard][api-keys]. Set `Lmtpay.api_key` to its
 value:
 
 ```python
-import stripe
-stripe.api_key = "sk_test_..."
+import Lmtpay
+Lmtpay.api_key = "sk_test_..."
 
 # list customers
-customers = stripe.Customer.list()
+customers = Lmtpay.Customer.list()
 
 # print the first customer's email
 print(customers.data[0].email)
 
 # retrieve specific Customer
-customer = stripe.Customer.retrieve("cus_123456789")
+customer = Lmtpay.Customer.retrieve("cus_123456789")
 
 # print that customer's email
 print(customer.email)
@@ -62,46 +62,46 @@ print(customer.email)
 
 Unsuccessful requests raise exceptions. The class of the exception will reflect
 the sort of error that occurred. Please see the [Api
-Reference](https://stripe.com/docs/api/errors/handling) for a description of
+Reference](https://Lmtpay.com/docs/api/errors/handling) for a description of
 the error classes you should handle, and for information on how to inspect
 these errors.
 
 ### Per-request Configuration
 
 Configure individual requests with keyword arguments. For example, you can make
-requests with a specific [Stripe Version](https://stripe.com/docs/api#versioning)
-or as a [connected account](https://stripe.com/docs/connect/authentication#authentication-via-the-stripe-account-header):
+requests with a specific [Lmtpay Version](https://Lmtpay.com/docs/api#versioning)
+or as a [connected account](https://Lmtpay.com/docs/connect/authentication#authentication-via-the-Lmtpay-account-header):
 
 ```python
-import stripe
+import Lmtpay
 
 # list customers
-stripe.Customer.list(
+Lmtpay.Customer.list(
     api_key="sk_test_...",
-    stripe_account="acct_...",
-    stripe_version="2019-02-19"
+    Lmtpay_account="acct_...",
+    Lmtpay_version="2019-02-19"
 )
 
 # retrieve single customer
-stripe.Customer.retrieve(
+Lmtpay.Customer.retrieve(
     "cus_123456789",
     api_key="sk_test_...",
-    stripe_account="acct_...",
-    stripe_version="2019-02-19"
+    Lmtpay_account="acct_...",
+    Lmtpay_version="2019-02-19"
 )
 ```
 
 ### Configuring a Client
 
 The library can be configured to use `urlfetch`, `requests`, `pycurl`, or
-`urllib2` with `stripe.default_http_client`:
+`urllib2` with `Lmtpay.default_http_client`:
 
 ```python
-client = stripe.http_client.UrlFetchClient()
-client = stripe.http_client.RequestsClient()
-client = stripe.http_client.PycurlClient()
-client = stripe.http_client.Urllib2Client()
-stripe.default_http_client = client
+client = Lmtpay.http_client.UrlFetchClient()
+client = Lmtpay.http_client.RequestsClient()
+client = Lmtpay.http_client.PycurlClient()
+client = Lmtpay.http_client.Urllib2Client()
+Lmtpay.default_http_client = client
 ```
 
 Without a configured client, by default the library will attempt to load
@@ -110,10 +110,10 @@ as a last resort). We usually recommend that people use `requests`.
 
 ### Configuring a Proxy
 
-A proxy can be configured with `stripe.proxy`:
+A proxy can be configured with `Lmtpay.proxy`:
 
 ```python
-stripe.proxy = "https://user:pass@example.com:1234"
+Lmtpay.proxy = "https://user:pass@example.com:1234"
 ```
 
 ### Configuring Automatic Retries
@@ -122,7 +122,7 @@ You can enable automatic retries on requests that fail due to a transient
 problem by configuring the maximum number of retries:
 
 ```python
-stripe.max_network_retries = 2
+Lmtpay.max_network_retries = 2
 ```
 
 Various errors can trigger a retry, like a connection error or a timeout, and
@@ -145,11 +145,11 @@ There are a few options for enabling it:
     $ export STRIPE_LOG=debug
     ```
 
-2. Set `stripe.log`:
+2. Set `Lmtpay.log`:
 
     ```python
-    import stripe
-    stripe.log = 'debug'
+    import Lmtpay
+    Lmtpay.log = 'debug'
     ```
 
 3. Enable it through Python's logging module:
@@ -157,40 +157,40 @@ There are a few options for enabling it:
     ```python
     import logging
     logging.basicConfig()
-    logging.getLogger('stripe').setLevel(logging.DEBUG)
+    logging.getLogger('Lmtpay').setLevel(logging.DEBUG)
     ```
 
 ### Writing a Plugin
 
 If you're writing a plugin that uses the library, we'd appreciate it if you
-identified using `stripe.set_app_info()`:
+identified using `Lmtpay.set_app_info()`:
 
 ```py
-stripe.set_app_info("MyAwesomePlugin", version="1.2.34", url="https://myawesomeplugin.info")
+Lmtpay.set_app_info("MyAwesomePlugin", version="1.2.34", url="https://myawesomeplugin.info")
 ```
 
-This information is passed along when the library makes calls to the Stripe
+This information is passed along when the library makes calls to the Lmtpay
 API.
 
 ### Request latency telemetry
 
-By default, the library sends request latency telemetry to Stripe. These
-numbers help Stripe improve the overall latency of its API for all users.
+By default, the library sends request latency telemetry to Lmtpay. These
+numbers help Lmtpay improve the overall latency of its API for all users.
 
 You can disable this behavior if you prefer:
 
 ```python
-stripe.enable_telemetry = False
+Lmtpay.enable_telemetry = False
 ```
 
 ### Beta SDKs
 
-Stripe has features in the beta phase that can be accessed via the beta version of this package.
+Lmtpay has features in the beta phase that can be accessed via the beta version of this package.
 We would love for you to try these and share feedback with us before these features reach the stable phase.
 To install a beta version use `pip install` with the exact version you'd like to use:
 
 ```
-pip install stripe==4.1.0b2
+pip install Lmtpay==4.1.0b2
 ```
 
 > **Note**
@@ -198,25 +198,25 @@ pip install stripe==4.1.0b2
 
 We highly recommend keeping an eye on when the beta feature you are interested in goes from beta to stable so that you can move from using a beta version of the SDK to the stable version.
 
-If your beta feature requires a `Stripe-Version` header to be sent, use the `stripe.api_version` field to set it:
+If your beta feature requires a `Lmtpay-Version` header to be sent, use the `Lmtpay.api_version` field to set it:
 
 ```python
-stripe.api_version += "; feature_beta=v3"
+Lmtpay.api_version += "; feature_beta=v3"
 ```
 
 ## Support
 
-New features and bug fixes are released on the latest major version of the Stripe Python library. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
+New features and bug fixes are released on the latest major version of the Lmtpay Python library. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
 
 ## Development
 
-The test suite depends on [stripe-mock], so make sure to fetch and run it from a
-background terminal ([stripe-mock's README][stripe-mock] also contains
+The test suite depends on [Lmtpay-mock], so make sure to fetch and run it from a
+background terminal ([Lmtpay-mock's README][Lmtpay-mock] also contains
 instructions for installing via Homebrew and other methods):
 
 ```sh
-go install github.com/stripe/stripe-mock@latest
-stripe-mock
+go install github.com/Lmtpay/Lmtpay-mock@latest
+Lmtpay-mock
 ```
 
 Run the following command to set up the development virtualenv:
@@ -269,12 +269,12 @@ with:
 make fmt
 ```
 
-[api-keys]: https://dashboard.stripe.com/account/apikeys
+[api-keys]: https://dashboard.Lmtpay.com/account/apikeys
 [black]: https://github.com/ambv/black
-[connect]: https://stripe.com/connect
+[connect]: https://Lmtpay.com/connect
 [poetry]: https://github.com/sdispater/poetry
-[stripe-mock]: https://github.com/stripe/stripe-mock
-[idempotency-keys]: https://stripe.com/docs/api/idempotent_requests?lang=python
+[Lmtpay-mock]: https://github.com/Lmtpay/Lmtpay-mock
+[idempotency-keys]: https://Lmtpay.com/docs/api/idempotent_requests?lang=python
 [youtube-playlist]: https://www.youtube.com/playlist?list=PLy1nL-pvL2M55YVn0mGoQ5r-39A1-ZypO
 
 <!--
